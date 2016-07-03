@@ -29,7 +29,7 @@ namespace AmazonPlugin
             File.WriteAllBytes(pFile, new WebClient().DownloadData(imageUrl));
             return pFile;
         }
-        public async Task GetAlbumPicture(PluginAlbum album, CancellationToken ct, IPluginCallback updateCallback, Action<int, string> updateAction)
+        public async Task GetAlbumPicture(PluginAlbum album, CancellationToken ct, Action<int, string, PluginImage> updateAction)
         {
             var expr = album.AlbumArtist + " - " + album.AlbumName;
             var authentication = new AmazonAuthentication
@@ -63,7 +63,7 @@ namespace AmazonPlugin
                 }
             }, ct);
 
-            if (result == null || result.Items == null)
+            if (result == null || result.Items == null || result.Items.Item == null)
                 return;
             foreach (var item in result.Items.Item)
             {
@@ -97,14 +97,7 @@ namespace AmazonPlugin
                         }
                         res.Id = album.Id;
                         res.FoundByPlugin = Name;
-                        if (updateAction == null)
-                        {
-                            updateCallback.PictureUpdateNotification(res);
-                        }
-                        else
-                        {
-                            updateAction(album.Id, res.Filename);
-                        }
+                        updateAction(album.Id, res.Filename, res);
                     }
                 }
                 catch
