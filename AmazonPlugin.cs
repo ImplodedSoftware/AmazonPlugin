@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using ImPluginEngine.Abstractions.Interfaces;
 using ImPluginEngine.Helpers;
-using ImPluginEngine.Interfaces;
 using ImPluginEngine.Types;
 using Nager.AmazonProductAdvertising;
 using Nager.AmazonProductAdvertising.Model;
@@ -29,7 +28,7 @@ namespace AmazonPlugin
             File.WriteAllBytes(pFile, new WebClient().DownloadData(imageUrl));
             return pFile;
         }
-        public async Task GetAlbumPicture(PluginAlbum album, CancellationToken ct, Action<int, string, PluginImage> updateAction)
+        public async Task GetAlbumPicture(PluginAlbum album, CancellationToken ct, Action<PluginImage> updateAction)
         {
             var expr = album.AlbumArtist + " - " + album.AlbumName;
             var authentication = new AmazonAuthentication
@@ -48,7 +47,6 @@ namespace AmazonPlugin
                 endPoint = sf.Endpoint;
                 searchType = sf.SearchType;
             }
-            //ItemSearchResponse result = null;
             AmazonItemResponse result = null;
             await Task.Run(() =>
             {
@@ -63,7 +61,7 @@ namespace AmazonPlugin
                 }
             }, ct);
 
-            if (result == null || result.Items == null || result.Items.Item == null)
+            if (result?.Items?.Item == null)
                 return;
             foreach (var item in result.Items.Item)
             {
@@ -97,7 +95,7 @@ namespace AmazonPlugin
                         }
                         res.Id = album.Id;
                         res.FoundByPlugin = Name;
-                        updateAction(album.Id, res.Filename, res);
+                        updateAction(res);
                     }
                 }
                 catch
