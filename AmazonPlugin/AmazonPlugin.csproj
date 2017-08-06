@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ImPluginEngine">
-      <HintPath>..\..\LastFmPlugin_old\_lib\ImPluginEngine.dll</HintPath>
+      <HintPath>..\_lib\ImPluginEngine.dll</HintPath>
     </Reference>
     <Reference Include="ImPluginEngine.Abstractions">
-      <HintPath>..\..\LastFmPlugin_old\_lib\ImPluginEngine.Abstractions.dll</HintPath>
+      <HintPath>..\_lib\ImPluginEngine.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Nager.AmazonProductAdvertising, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nager.AmazonProductAdvertising.1.0.13\lib\net45\Nager.AmazonProductAdvertising.dll</HintPath>
