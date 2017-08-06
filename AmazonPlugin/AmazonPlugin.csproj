@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2A48679A-93BF-4BDE-9AA0-56529D63C3A2}</ProjectGuid>
+    <ProjectGuid>{B4C347E0-7E78-4B36-B2C5-C49B0084548C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AmazonPlugin</RootNamespace>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Helium.App\bin\Debug\HeliumPlugins\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,29 +24,31 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Helium.App\bin\Release\HeliumPlugins\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImPluginEngine">
+      <HintPath>..\..\LastFmPlugin_old\_lib\ImPluginEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="ImPluginEngine.Abstractions">
+      <HintPath>..\..\LastFmPlugin_old\_lib\ImPluginEngine.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Nager.AmazonProductAdvertising, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Nager.AmazonProductAdvertising.1.0.13\lib\net45\Nager.AmazonProductAdvertising.dll</HintPath>
+      <HintPath>..\packages\Nager.AmazonProductAdvertising.1.0.13\lib\net45\Nager.AmazonProductAdvertising.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Nager.ArticleNumber, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Nager.AmazonProductAdvertising.1.0.13\lib\net45\Nager.ArticleNumber.dll</HintPath>
+      <HintPath>..\packages\Nager.AmazonProductAdvertising.1.0.13\lib\net45\Nager.ArticleNumber.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -61,26 +63,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AmazonConstants.cs" />
-    <Compile Include="AmazonPlugin.cs" />
     <Compile Include="AmazonConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AmazonConfigForm.Designer.cs">
       <DependentUpon>AmazonConfigForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AmazonConstants.cs" />
+    <Compile Include="AmazonPlugin.cs" />
     <Compile Include="AmazonSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ImPluginEngine.Abstractions\ImPluginEngine.Abstractions.csproj">
-      <Project>{433dd0f7-c2a3-4e95-aefb-c3b3086c1d6b}</Project>
-      <Name>ImPluginEngine.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ImPluginEngine\ImPluginEngine.csproj">
-      <Project>{481b858b-619c-4194-bb9d-9e651afc4c9e}</Project>
-      <Name>ImPluginEngine</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,12 +83,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>..\..\..\..\buildhelper.exe amazon setpwd</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>..\..\..\..\buildhelper.exe amazon restore</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
