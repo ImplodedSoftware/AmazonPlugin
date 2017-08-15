@@ -1,4 +1,5 @@
-﻿using Nager.AmazonProductAdvertising.Model;
+﻿using Nager.AmazonProductAdvertising;
+using Nager.AmazonProductAdvertising.Model;
 
 namespace AmazonPlugin
 {
