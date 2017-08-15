@@ -47,6 +47,7 @@
             // 
             // comboBoxCatalog
             // 
+            this.comboBoxCatalog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCatalog.FormattingEnabled = true;
             this.comboBoxCatalog.Items.AddRange(new object[] {
             "Brazil",
@@ -97,6 +98,7 @@
             // 
             // comboBoxSearchType
             // 
+            this.comboBoxSearchType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSearchType.FormattingEnabled = true;
             this.comboBoxSearchType.Items.AddRange(new object[] {
             "Music",
