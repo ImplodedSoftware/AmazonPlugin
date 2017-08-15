@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AmazonPlugin</RootNamespace>
     <AssemblyName>AmazonPlugin</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,19 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nager.AmazonProductAdvertising, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Nager.AmazonProductAdvertising.1.0.13\lib\net45\Nager.AmazonProductAdvertising.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Nager.ArticleNumber, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Nager.AmazonProductAdvertising.1.0.13\lib\net45\Nager.ArticleNumber.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -83,19 +78,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="AmazonConfigForm.resx">
       <DependentUpon>AmazonConfigForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>..\..\..\..\buildhelper.exe amazon setpwd</PreBuildEvent>
+    <PreBuildEvent>"$(SolutionDir)buildhelper.exe" amazon setpwd "$(ProjectDir)AmazonConstants.cs"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>..\..\..\..\buildhelper.exe amazon restore</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)buildhelper.exe" amazon restore "$(ProjectDir)AmazonConstants.cs"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
