@@ -37,7 +37,7 @@ namespace AmazonPlugin
                 SecretKey = AmazonConstants.AWS_SECRET_KEY
             };
 
-            var endPoint = AmazonEndpoint.US;
+            var endPoint = AmazonEndpoint.UK;
             var searchType = AmazonSearchIndex.Music;
             var settingsFile = Path.Combine(PluginConstants.SettingsPath, "amazon.json");
             if (File.Exists(settingsFile))
@@ -54,6 +54,11 @@ namespace AmazonPlugin
                 {
                     var wrapper = new AmazonWrapper(authentication, endPoint, "neon");
                     result = wrapper.Search(expr, searchType, AmazonResponseGroup.Large);
+                    if (result == null)
+                    {
+                        searchType = AmazonSearchIndex.DigitalMusic;
+                        result = wrapper.Search(expr, searchType, AmazonResponseGroup.Large);
+                    }
                 }
                 catch
                 {
